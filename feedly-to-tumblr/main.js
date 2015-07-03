@@ -5,6 +5,12 @@ javascript:(function(){ var scriptLoc = '//travisnine.github.io/feedly-to-tumblr
 //vars
 var loadScript = function () {
 	if (window.f2t) return false;
+	if (window.location.host != 'feedly.com') {
+		if (prompt("you aren't on feedly.com!\ngo now?")) {
+			window.location.href = 'https://feedly.com/i/index';
+		}
+		return false;
+	}
 	
 	window.f2t = {};
 	window.f2t.logElement = {innerHTML:'',innerText:''};
