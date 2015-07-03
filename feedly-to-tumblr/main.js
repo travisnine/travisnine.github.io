@@ -3,7 +3,7 @@ javascript:(function(){ var scriptLoc = '//travisnine.github.io/feedly-to-tumblr
 */
 
 //vars
-function loadScript() {
+var loadScript = function () {
 	if (window.f2t) return false;
 	
 	window.f2t = {};
@@ -32,4 +32,5 @@ function loadScript() {
 		};
 
 	window.f2t.init();
-}();
+};
+loadScript();
