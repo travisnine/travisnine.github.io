@@ -6,7 +6,7 @@ javascript:(function(){ var scriptLoc = '//travisnine.github.io/feedly-to-tumblr
 var loadScript = function () {
 	if (window.f2t) return false;
 	if (window.location.host != 'feedly.com') {
-		if (prompt("you aren't on feedly.com!\ngo now?")) {
+		if (confirm("you aren't on feedly.com!\ngo now?\n ")) {
 			window.location.href = 'https://feedly.com/i/index';
 		}
 		return false;
