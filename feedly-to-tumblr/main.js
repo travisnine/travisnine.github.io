@@ -1,15 +1,19 @@
 /* bookmarklet = 
 javascript:(function(){ var scriptLoc = '//travisnine.github.io/feedly-to-tumblr/main.js'; var scriptEl = document.createElement('script'); scriptEl.src = scriptLoc; document.body.appendChild(scriptEl); })();
 */
+
+//vars
 window.f2t = {};
 window.f2t.logElement = {innerHTML:'',innerText:''};
+
+//funcs
 window.f2t.log = 
 	function(sTextToLog) {
 		window.f2t.logElement.innerText = sTextToLog;
 	};
 window.f2t.keyupHandler =
-	function() {
-		console.log('f2t: key up event');
+	function(keyEvt) {
+		// TODO: Sort through list with keys
 	};
 window.f2t.init = 
 	function() {
