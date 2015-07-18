@@ -18,7 +18,10 @@
 	</head>
 	<body>
 		RegEx Extract: <BR/><input type="text" onkeyup="window.kUyF0G9Cl9uAkscKtPap.regExExtract(this,arguments[0]);" class="txtInputWidth"/><BR/>
-		Replace: <BR/><input type="text" onkeyup="window.kUyF0G9Cl9uAkscKtPap.regExReplace(this,arguments[0]);" class="txtInputWidth"/><BR/>
+		<hr>
+		Replace This: <BR/><input type="text" id="replaceFind" class="txtInputWidth"/><BR/>
+		With This: <BR/><input type="text" id="replaceWithThis" onkeyup="window.kUyF0G9Cl9uAkscKtPap.regExReplace(this,arguments[0]);" class="txtInputWidth"/><BR/>
+		<hr>
 		<BR/>Input:  <BR/><textarea class="ioTextArea" id="sourceText"></textarea>
 		<BR/>Output: <BR/><textarea class="ioTextArea" id="destText"></textarea>
 		<script src="RegExTools.js"></script>
