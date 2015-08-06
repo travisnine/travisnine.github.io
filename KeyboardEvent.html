@@ -12,6 +12,10 @@ window.addEventListener(
 	'keydown',
 	function(event) {
 		event.preventDefault();
+		var outputAdd = '-----';
+		for (x in event) {
+			outputAdd += x + ': ' + event[x] + '\r\n';
+		}
 		outputBox.textContent += '\r\n'
 			+ JSON.stringify(event)
 			;
