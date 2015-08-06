@@ -12,10 +12,11 @@ window.addEventListener(
 	'keydown',
 	function(event) {
 		event.preventDefault();
-		var outputAdd = '-----';
+		var outputAdd = '';
 		for (x in event) {
 			outputAdd += x + ': ' + event[x] + '\r\n';
 		}
+		outputAdd += '-----\r\n';
 		outputBox.textContent += '\r\n' + outputAdd;
 	}
 );
