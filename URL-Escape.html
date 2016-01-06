@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>travisnine.github.io - URL Escape</title>
+		<script>
+		  window.doEscape = 
+            function() {
+                window.document.getElementById('escData').textContent = encodeURIComponent(window.document.getElementById('urlescape').value);
+            };
+		</script>
+	</head>
+	<body>
+	  <input type="text" id="urlescape" oninput="window.doEscape();" style="width: 100%;"/><BR/>
+	  <BR/>
+      <input type="button" value="encode" onclick="window.doEscape();"/>
+	  <BR/>
+	  <BR/>
+	  <div id="escData">Escaped data will show here when you type something in the box above (or click the button).</div>
+	</body>
+</html>
