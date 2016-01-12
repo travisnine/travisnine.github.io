@@ -35,14 +35,14 @@
                 // parse cidr
                 var input = window.inputCIDR.value;
                 var sep1 = input.split('/');
-                if (sep1.length != 2) return window.print_error('ERROR: there must be exactly one / in the input.');
+                if (sep1.length != 2) return window.print_error('ERROR: there must be exactly one / in the input. zero is not enough. two is too many. THREE IS RIGHT OUT!');
                 var ipAddr = sep1[0];
                 var mask = parseInt(sep1[1]);
                 
                 // verify mask
-                if (isNaN(mask)) return window.print_error('ERROR: "' + mask + '" is not a number');
-                if (mask > 30) return window.print_error('ERROR: mask is larger than 30');
-                if (mask < 0) return window.print_error('ERROR: mask is less than 0');
+                if (isNaN(mask)) return window.print_error('ERROR: "' + sep1[1] + '" is not a number (at least your browser doesn\'t think it is...)');
+                if (mask > 30) return window.print_error('ERROR: mask is larger than 30 (/31 is only valid as a point to point connection and /32 is a single address)');
+                if (mask < 0) return window.print_error('ERROR: mask is less than 0 (a negative mask doesn\'t even make sense...)');
                 
                 // parse mask
                 window.bufferview.setUint32(4,0xFFFFFFFF << (32-mask));
@@ -50,13 +50,13 @@
                 
                 // parse address
                 var sep2 = ipAddr.split('.');
-                if (sep2.length > 4) return window.print_error('ERROR: there can be no more than 4 octets');
+                if (sep2.length > 4) return window.print_error('ERROR: there can be no more than 4 octets in ipv4 (that means there should be only THREE dots...)');
                 for (var x in sep2) {
                     var xval = parseInt(x);
                     var val = parseInt(sep2[x]);
-                    if (isNaN(val)) return window.print_error('ERROR: "' + sep2[x] + '" is not a number');
-                    if (val > 255) return window.print_error('ERROR: octet # ' + (x) + ' (' + val + ') is larger than 255');
-                    if (val < 0) return window.print_error('ERROR: octet # ' + (x) + ' (' + val + ') is less than 0');
+                    if (isNaN(val)) return window.print_error('ERROR: "' + sep2[x] + '" is not a number (at least your browser doesn\'t think it is...)');
+                    if (val > 255) return window.print_error('ERROR: octet # ' + (x) + ' (' + val + ') is larger than 255 ("octet"... it means 8 BITS... (2^8)-1 = 255! max!!!)');
+                    if (val < 0) return window.print_error('ERROR: octet # ' + (x) + ' (' + val + ') is less than 0 (ipv4 uses four UNSIGNED 8 bit integers, that means positive numbers only...)');
                     window.bufferview.setUint8(xval,val);
                 }
                 
@@ -71,8 +71,11 @@
                 
                 // show results
                 var printIp4 = function(offset) {
-                    var a = window.bufferview.getUint8;
-                    return window.bufferview.getUint8(offset) + '.' + window.bufferview.getUint8(++offset) + '.' + window.bufferview.getUint8(++offset) + '.' + window.bufferview.getUint8(++offset);
+                    return         window.bufferview.getUint8(offset)
+                           + '.' + window.bufferview.getUint8(++offset)
+                           + '.' + window.bufferview.getUint8(++offset)
+                           + '.' + window.bufferview.getUint8(++offset)
+                           ;
                 }
                 window.outputRange.textContent = 
                       '  First Address: ' + printIp4(12) + "\n"
