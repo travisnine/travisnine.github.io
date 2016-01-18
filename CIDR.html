@@ -12,10 +12,11 @@
         <pre id="outputLog"/><pre><br>
 	</body>
     <script>
-        window.buffer       = null;
-        window.bufferview   = null;
+        window.buffer = new ArrayBuffer(24);
+        window.bufferview = new DataView(buffer);
         window.inputCIDR    = window.document.getElementById('inputCIDR');
         window.outputRange  = window.document.getElementById('outputRange');
+        window.outputLog  = window.document.getElementById('outputLog');
         window.print_error = 
             function(msg) {
                 window.outputLog.textContent = msg;
@@ -23,8 +24,6 @@
         window.doCalc = 
             function() {
                 window.outputRange.textContent = '';
-                window.buffer = new ArrayBuffer(24);
-                window.bufferview = new DataView(buffer);
                 //  0-3  = ip
                 //  4-7  = mask
                 //  8-11 = ~mask
