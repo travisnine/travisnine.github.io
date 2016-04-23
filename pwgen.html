@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>random password</title>
+    </head>
+    <body>
+        <button onclick="window.gen62Fac();">Gen 62!</button><br><br>
+        <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" type="number" value="62"/><br><br>
+    </body>
+    <pre id="outputText"></pre>
+    <script>
+
+var outputText = window.document.getElementById('outputText');
+var genLength = window.document.getElementById('genLength');
+// outputText.textContent = '';
+
+function addOutputLine(s) {
+    outputText.textContent = s + "\r\n" + outputText.textContent;
+}
+
+function getCharSet() {
+    return ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
+}
+
+window.charSet = getCharSet();
+
+function shuffleDeck() {
+    res = '';
+    var newDeck = getCharSet();
+    var randVals = new Uint8Array(newDeck.length);
+    crypto.getRandomValues(randVals);
+    while (newDeck.length > 0) {
+        var randNum = randVals[newDeck.length - 1] % newDeck.length;
+        var card = newDeck.splice(randNum,1)[0];
+        res += card;
+    }
+    return res;
+};
+
+window.gen62Fac = function() {
+    addOutputLine(shuffleDeck());
+};
+
+window.gen62Pow = function() {
+    var randLen = parseInt(genLength.value);
+    try {
+        randLen = parseInt(randLen);
+    } catch(e) {
+        addOutputLine("ERROR: " + randLen + " is not a number (or at least your browser doesn't think so)");
+    }
+    var randVals = new Uint8Array(randLen);
+    crypto.getRandomValues(randVals);
+    res = '';
+    for (var x = 0 ; x < randLen ; x++) {
+        res += window.charSet[randVals[x] % window.charSet.length];
+    }
+    addOutputLine(res);
+};
+
+    </script>
+</html>
