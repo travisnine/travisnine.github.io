@@ -5,6 +5,8 @@
         <title>random password</title>
     </head>
     <body>
+        <div>Warning: the strength of these depends on how good of a CSPRNG your browsers <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">crypto.getRandomValues()</a> function is.</div>
+        <br/><br/>
         <button onclick="window.gen62Fac();">Gen 62!</button><br><br>
         <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" type="number" value="62"/><br><br>
     </body>
