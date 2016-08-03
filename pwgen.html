@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
     <head>
@@ -7,41 +8,47 @@
     <body>
         <div>Warning: the strength of these depends on how good of a CSPRNG your browsers <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">crypto.getRandomValues()</a> function is.</div>
         <br/><br/>
-        <button onclick="window.gen62Fac();">Gen 62!</button><br><br>
+        <button onclick="window.gen62Fac();">Gen 62!</button> Itr = <input id="shuffleItr" type="number" value="7"/><br><br>
         <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" type="number" value="62"/><br><br>
     </body>
     <pre id="outputText"></pre>
     <script>
 
 var outputText = window.document.getElementById('outputText');
-var genLength = window.document.getElementById('genLength');
-// outputText.textContent = '';
+var genLength  = window.document.getElementById('genLength');
+var shuffleItr = window.document.getElementById('shuffleItr');
 
 function addOutputLine(s) {
     outputText.textContent = s + "\r\n" + outputText.textContent;
 }
 
+window.charSet = getCharSet();
+
 function getCharSet() {
     return ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
 }
 
-window.charSet = getCharSet();
-
-function shuffleDeck() {
-    res = '';
-    var newDeck = getCharSet();
-    var randVals = new Uint8Array(newDeck.length);
-    crypto.getRandomValues(randVals);
-    while (newDeck.length > 0) {
-        var randNum = randVals[newDeck.length - 1] % newDeck.length;
-        var card = newDeck.splice(randNum,1)[0];
-        res += card;
+function shuffleDeck(itr) {
+    if (!itr) itr = 1;
+    var curDeck = getCharSet();
+    while (itr--) {
+        res = '';
+        var nextDeck = [];
+        var randVals = new Uint8Array(curDeck.length);
+        crypto.getRandomValues(randVals);
+        while (curDeck.length > 0) {
+            var randNum = randVals[curDeck.length - 1] % curDeck.length;
+            var card = curDeck.splice(randNum,1)[0];
+            if (itr) nextDeck.push(card);
+            res += card;
+        }
+        curDeck = nextDeck;
     }
     return res;
 };
 
 window.gen62Fac = function() {
-    addOutputLine(shuffleDeck());
+    addOutputLine(shuffleDeck(shuffleItr.value));
 };
 
 window.gen62Pow = function() {
