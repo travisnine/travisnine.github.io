@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
     <head>
@@ -7,16 +6,40 @@
     </head>
     <body>
         <div>Warning: the strength of these depends on how good of a CSPRNG your browsers <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">crypto.getRandomValues()</a> function is.</div>
+        <div>Warning: the security of the plaintext depends on how good your browser protects then contents of password inputs</div>
         <br/><br/>
         <button onclick="window.gen62Fac();">Gen 62!</button> Itr = <input id="shuffleItr" type="number" value="7"/><br><br>
         <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" type="number" value="62"/><br><br>
     </body>
     <pre id="outputText"></pre>
+    <div id="outputPasswords"></div>
     <script>
 
 var outputText = window.document.getElementById('outputText');
 var genLength  = window.document.getElementById('genLength');
 var shuffleItr = window.document.getElementById('shuffleItr');
+var outputPasswords = window.document.getElementById('outputPasswords');
+var passwordsMade = 0;
+
+function addPassword(s) {
+    ++passwordsMade;
+    var newDiv = document.createElement('div');
+    var newPasswordBox = document.createElement('input');
+    var copyButton = document.createElement('a');
+    
+    newPasswordBox.type = "password"
+    newPasswordBox.value = s;
+    
+    copyButton.textContent = 'Password ' + passwordsMade + ' (Copy)';
+    copyButton.onclick = function(){
+        window.prompt('Ctrl+C to copy',newPasswordBox.value);
+    };
+    
+    newDiv.appendChild(copyButton);
+    newDiv.appendChild(newPasswordBox);
+    
+    outputPasswords.appendChild(newDiv);
+}
 
 function addOutputLine(s) {
     outputText.textContent = s + "\r\n" + outputText.textContent;
@@ -46,7 +69,7 @@ function shuffleDeck(itr) {
 };
 
 window.gen62Fac = function() {
-    addOutputLine(shuffleDeck(shuffleItr.value));
+    addPassword(shuffleDeck(shuffleItr.value));
 };
 
 window.charSet = getCharSet();
@@ -63,7 +86,7 @@ window.gen62Pow = function() {
     for (var x = 0 ; x < randLen ; x++) {
         res += window.charSet[randVals[x] % window.charSet.length];
     }
-    addOutputLine(res);
+    addPassword(res);
 };
 
     </script>
