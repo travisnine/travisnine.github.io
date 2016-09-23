@@ -6,10 +6,11 @@
     </head>
     <body>
         <div>Warning: the strength of these depends on how good of a CSPRNG your browsers <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">crypto.getRandomValues()</a> function is.</div>
-        <div>Warning: the security of the plaintext depends on how good your browser protects then contents of password inputs</div>
+        <div>Warning: the security of the plaintext depends on how good your browser/OS protects the contents of password fields</div>
         <br/><br/>
         <button onclick="window.gen62Fac();">Gen 62!</button> Itr = <input id="shuffleItr" type="number" value="7"/><br><br>
         <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" type="number" value="62"/><br><br>
+        <button onclick="window.removeAllGeneratedPasswords();">Remove All Generated Passwords</button>
     </body>
     <pre id="outputText"></pre>
     <div id="outputPasswords"></div>
@@ -25,7 +26,7 @@ function addPassword(s) {
     ++passwordsMade;
     var newDiv = document.createElement('div');
     var newPasswordBox = document.createElement('input');
-    var copyButton = document.createElement('a');
+    var copyButton = document.createElement('button');
     
     newPasswordBox.type = "password"
     newPasswordBox.value = s;
@@ -88,6 +89,10 @@ window.gen62Pow = function() {
     }
     addPassword(res);
 };
+
+window.removeAllGeneratedPasswords = function() {
+    outputPasswords.innerHTML = '';
+}
 
     </script>
 </html>
