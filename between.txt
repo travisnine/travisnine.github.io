@@ -4,7 +4,6 @@ my $start = $ARGV[0];
 my $end = $ARGV[1];
 
 while (<STDIN>) {
-        $_ =~ m{${start}(.*?)${end}};
-        print "$1\n";
+	print "$1\n" if $_ =~ m{${start}(.*?)${end}};
 }
 
