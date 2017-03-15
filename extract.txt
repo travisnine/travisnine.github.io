@@ -1,0 +1,8 @@
+#!/usr/bin/perl -w
+
+my $match = $ARGV[0];
+
+while (<STDIN>) {
+	print "$1\n" if $_ =~ m{${match}};
+}
+
