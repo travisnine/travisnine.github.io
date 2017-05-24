@@ -8,8 +8,8 @@
         <div>Warning: the strength of these depends on how good of a CSPRNG your browsers <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">crypto.getRandomValues()</a> function is.</div>
         <div>Warning: the security of the plaintext depends on how good your browser/OS protects the contents of password fields</div>
         <br/><br/>
-        <button onclick="window.gen62Fac();">Gen 62!</button> Itr = <input id="shuffleItr" type="number" value="1000"/><br><br>
-        <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" type="number" value="62"/><br><br>
+        <button onclick="window.gen62Fac();">Gen 62!</button> Itr = <input id="shuffleItr" type="number" value="1000"/> = 284 bits of entropy<br><br>
+        <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" onchange="window.CalcEntropy()" type="number" value="62"/> = <span id="bitsEnt">X</span> bits of entropy<br><br>
         <button onclick="window.removeAllGeneratedPasswords();">Remove All Generated Passwords</button>
     </body>
     <pre id="outputText"></pre>
@@ -77,7 +77,7 @@ window.gen62Fac = function() {
 
 window.charSet = getCharSet();
 window.gen62Pow = function() {
-    var randLen = parseInt(genLength.value);
+    var randLen = genLength.value;
     try {
         randLen = parseInt(randLen);
     } catch(e) {
@@ -95,6 +95,19 @@ window.gen62Pow = function() {
 window.removeAllGeneratedPasswords = function() {
     outputPasswords.innerHTML = '';
 }
+
+var bitsEnt = window.document.getElementById('bitsEnt');
+window.CalcEntropy = function() {
+    var randLen = genLength.value;
+    try {
+        randLen = parseInt(randLen);
+    } catch(e) {
+        addOutputLine("ERROR: " + randLen + " is not a number (or at least your browser doesn't think so)");
+    }
+    var totalBits = Math.floor(Math.log2(Math.pow(62,randLen)),1)
+    bitsEnt.textContent = totalBits;
+}
+window.CalcEntropy();
 
     </script>
 </html>
