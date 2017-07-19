@@ -16,6 +16,28 @@
     <div id="outputPasswords"></div>
     <script>
 
+var randPoolSize = 1024
+var randPool = new Uint8Array(randPoolSize);
+var randPoolX = randPoolSize;
+function safeRand() {
+    if (++randPoolX >= randPoolSize) {
+        randPoolX = 0;
+        crypto.getRandomValues(randPool);
+    }
+    return randPool[randPoolX];
+}
+
+// returns a non modulo-biased number between 0 and max
+function safeRandMax(max) {
+    var rand_limit = 256 - (256 % max);
+    var res = 0;
+    for(;;) {
+        res = safeRand();
+        if (res < rand_limit) break;
+    }
+    return res % max;
+}
+
 if (window.location.protocol == 'http:') window.location.protocol = 'https:';
 
 var outputText = window.document.getElementById('outputText');
@@ -58,10 +80,8 @@ function shuffleDeck(itr) {
     while (itr--) {
         res = '';
         var nextDeck = [];
-        var randVals = new Uint8Array(curDeck.length);
-        crypto.getRandomValues(randVals);
         while (curDeck.length > 0) {
-            var randNum = randVals[curDeck.length - 1] % curDeck.length;
+            var randNum = safeRandMax(curDeck.length);
             var card = curDeck.splice(randNum,1)[0];
             if (itr) nextDeck.push(card);
             res += card;
@@ -83,11 +103,9 @@ window.gen62Pow = function() {
     } catch(e) {
         addOutputLine("ERROR: " + randLen + " is not a number (or at least your browser doesn't think so)");
     }
-    var randVals = new Uint8Array(randLen);
-    crypto.getRandomValues(randVals);
     res = '';
     for (var x = 0 ; x < randLen ; x++) {
-        res += window.charSet[randVals[x] % window.charSet.length];
+        res += window.charSet[safeRandMax(window.charSet.length)];
     }
     addPassword(res);
 };
