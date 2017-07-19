@@ -78,17 +78,16 @@ function shuffleDeck(itr) {
     if (!itr) itr = 1000;
     var curDeck = getCharSet();
     while (itr--) {
-        res = '';
-        var nextDeck = [];
-        while (curDeck.length > 0) {
-            var randNum = safeRandMax(curDeck.length);
-            var card = curDeck.splice(randNum,1)[0];
-            if (itr) nextDeck.push(card);
-            res += card;
+        // https://www.rosettacode.org/wiki/Knuth_shuffle#JavaScript
+        var rand, temp, i;
+        for (i = curDeck.length - 1; i > 0; i -= 1) {
+            rand = safeRandMax(i+1)
+            temp = curDeck[rand];
+            curDeck[rand] = curDeck[i];
+            curDeck[i] = temp;
         }
-        curDeck = nextDeck;
     }
-    return res;
+    return curDeck.join('');
 };
 
 window.gen62Fac = function() {
