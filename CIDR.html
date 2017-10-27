@@ -79,13 +79,14 @@
                            ;
                 }
                 window.outputRange.textContent = 
-                      '  First Address: ' + printIp4(12) + "\n"
-                    + '   Last Address: ' + printIp4(20) + "\n"
-                    + '    Subnet Mask: ' + printIp4(4)  + "\n"
-                    + '  BCast Address: ' + printIp4(16) + "\n\n"
-                    + ' Canonical CIDR: ' + printIp4(24) + '/' + mask + "\n\n"
-                    + '          Range: ' + printIp4(12) + ' - ' + printIp4(20) + "\n"
-                    + 'Avail Addresses: ' + (window.bufferview.getUint32(8) - 1) + "\n"
+                      '   First Address: ' + printIp4(12) + "\n"
+                    + '    Last Address: ' + printIp4(20) + "\n"
+                    + '     Subnet Mask: ' + printIp4(4)  + "\n"
+                    + '   BCast Address: ' + printIp4(16) + "\n\n"
+                    + '  Canonical CIDR: ' + printIp4(24) + '/' + mask + "\n\n"
+                    + '           Range: ' + printIp4(12) + ' - ' + printIp4(20) + "\n"
+                    + ' Avail Addresses: ' + (window.bufferview.getUint32(8) + 1) + "\n"
+		    + 'Usable Addresses: ' + (window.bufferview.getUint32(8) - 1) + "\n"
                     ;
                 
                 window.print_error('INFO: Success.');
