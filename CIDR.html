@@ -86,7 +86,7 @@
                     + '  Canonical CIDR: ' + printIp4(24) + '/' + mask + "\n\n"
                     + '           Range: ' + printIp4(12) + ' - ' + printIp4(20) + "\n"
                     + ' Avail Addresses: ' + (window.bufferview.getUint32(8) + 1) + "\n"
-		    + 'Usable Addresses: ' + (window.bufferview.getUint32(8) - 1) + "\n"
+                    + 'Usable Addresses: ' + (window.bufferview.getUint32(8) - 1) + "\n"
                     ;
                 
                 window.print_error('INFO: Success.');
