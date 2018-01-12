@@ -9,7 +9,7 @@
         <div>Warning: the security of the plaintext depends on how good your browser/OS protects the contents of password fields</div>
         <br/><br/>
         <button onclick="window.gen62Fac();">Gen 62!</button> Itr = <input id="shuffleItr" type="number" value="1000"/> = 284 bits of entropy<br><br>
-        <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" onchange="window.CalcEntropy()" type="number" value="62"/> = <span id="bitsEnt">X</span> bits of entropy<br><br>
+        <button onclick="window.gen62Pow();">Gen 62^X</button> X = <input id="genLength" onchange="window.CalcEntropy()" type="number" value="25"/> = <span id="bitsEnt">X</span> bits of entropy<br><br>
         <button onclick="window.removeAllGeneratedPasswords();">Remove All Generated Passwords</button>
     </body>
     <pre id="outputText"></pre>
