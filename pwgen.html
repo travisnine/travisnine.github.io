@@ -121,7 +121,8 @@ window.CalcEntropy = function() {
     } catch(e) {
         addOutputLine("ERROR: " + randLen + " is not a number (or at least your browser doesn't think so)");
     }
-    var totalBits = Math.floor(Math.log2(Math.pow(62,randLen)),1)
+    //var totalBits = Math.floor(Math.log2(Math.pow(62,randLen)),1)
+    var totalBits = Math.floor((randLen * 8) / 1.34375,1)
     bitsEnt.textContent = totalBits;
 }
 window.CalcEntropy();
