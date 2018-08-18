@@ -2,30 +2,12 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>check entropy</title>
+		<title>travisnine.github.io - index</title>
 	</head>
 	<body>
-        A crappy algo to calculate psuedo worst-case entropy of your password assuming that you randomly generated it and you didn't use words<br/>
-		<input type="password" value="" oninput="window.checkentropy(this)" style="width: 500px;"/>
-        <div id="res"/></div>
-        <script>
-window.resbox = window.document.getElementById('res');
-window.checkentropy = function(obj) {
-    var passwd = obj.value;
-    var cl = {};
-    var cll = 0;
-    var pwl = 0;
-    for (c of passwd) {
-        if (!cl[c]) {
-            cl[c] = 1;
-            cll++;
-        }
-        pwl++;
-    }
-    var bits = Math.floor((pwl*Math.log(cll))/Math.log(2));
-    console.log(cl,cll,pwl,bits);
-    resbox.textContent = bits + " bits";
-}
-        </script>
+		Moved to <a href="https://travisnine.gitlab.io/">https://travisnine.gitlab.io/</a>
+	<script>
+		window.location.href = 'https://travisnine.gitlab.io/';
+	</script>
 	</body>
 </html>
