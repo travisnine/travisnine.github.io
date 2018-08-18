@@ -1,37 +1,13 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Word Generator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>travisnine.github.io - index</title>
 	</head>
-	<body onload="window.WordGen.doOnLoad()">
-		<button onclick="window.WordGen.buttonClick();">Gen 10 Random Words</button>
-		<pre id="log"></pre>
-		<script src="wordlist.js"></script>
-<script>
-window.WordGen = {};
-window.WordGen.logElement = window.document.getElementById('log');
-window.WordGen.log = function(sHtmlToAdd) { window.WordGen.logElement.innerHTML += sHtmlToAdd; };
-window.WordGen.logN = function(sHtmlToAdd) { window.WordGen.log(sHtmlToAdd + '\n'); };
-window.WordGen.genRandomWord =
-	function(numWords) {
-		var maxNumWords = 1000;
-		if (maxNumWords < numWords) numWords = maxNumWords;
-		var words = [];
-		var randVals = new Uint32Array(numWords);
-		window.crypto.getRandomValues(randVals);
-		for (var x = 0; x < randVals.length; x++) {
-			words.push(window.wordList[randVals[x] % window.wordList.length]);
-		}
-		return words;
-	}
-window.WordGen.buttonClick =
-	function() {
-		var words = window.WordGen.genRandomWord(10);
-		var word = '';
-		while (word = words.pop()) {
-			window.WordGen.logN(word);
-		}
-	}
-</script>
+	<body>
+		Moved to <a href="https://travisnine.gitlab.io/">https://travisnine.gitlab.io/</a>
+	<script>
+		window.location.hostname = 'travisnine.gitlab.io';
+	</script>
 	</body>
 </html>
